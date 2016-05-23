@@ -14,6 +14,6 @@ var world = null;
 
 function init() {
 	world = new World();
-	//world.populate(NUM_MASSES);
 	world.addBall();
+    world.addRing();
 }

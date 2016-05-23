@@ -38,7 +38,7 @@ function World()
 
             this.entities.push(ball);
         }
-    }
+    };
 
     this.step = function() {
         var tick = get_tick();
@@ -63,13 +63,17 @@ function World()
             }
         }
 
-        if(this.player != null) {
+        if(this.player !== null) {
             this.player.draw();
         }
-    }
+    };
 
     this.addBall = function() {
         this.entities.push(new Ball(canvas.width/2, 20, 2));
+    };
+
+    this.addRing = function() {
+        this.entities.push(new Ring(100, 100));
     };
 
     this.start = function()	{
@@ -77,11 +81,11 @@ function World()
         this.intervalID = window.setInterval(function(){
             that.step();
         }, INTERVAL);
-    }
+    };
 
     this.stop = function() {
         window.clearInterval(this.intervalID);
-    }
+    };
 
     function clear() {
         if(MOTION_BLUR) {
