@@ -15,5 +15,5 @@ var world = null;
 function init() {
 	world = new World();
 	world.addBall();
-    world.addRing();
+    world.initLevel();
 }
