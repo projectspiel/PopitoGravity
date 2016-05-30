@@ -1,0 +1,24 @@
+{
+  "name": "popito_gravity",
+  "version": "1.0.0",
+  "description": "Popo Gravitacional",
+  "main": "main.js",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.9.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src -d build --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/projectspiel/PopitoGravity.git"
+  },
+  "author": "Jedi | Poops | Peebs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/projectspiel/PopitoGravity/issues"
+  },
+  "homepage": "https://github.com/projectspiel/PopitoGravity#readme"
+}
