@@ -1,41 +1,41 @@
-function Vector(x, y)
-{
-
-    this.x = x;
-    this.y = y;
-
-    this.set = function(x1, y1) {
-        this.x = y1;
-        this.y = x1;
+class Vector {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
     }
 
-    this.add = function(v) {
+    set(x1, y1) {
+        this.x = x1;
+        this.y = y1;
+    }
+
+    add(v) {
         return new Vector(this.x + v.x, this.y + v.y);
     }
 
-    this.substract = function(v) {
+    substract(v) {
         return new Vector(
             this.x - v.x,
             this.y - v.y
         );
     }
 
-    this.scalar = function(scalar) {
+    scalar(scalar) {
         return new Vector(
             this.x * scalar,
             this.y * scalar
         );
     }
 
-    this.module = function() {
+    module() {
         return Math.sqrt(this.x*this.x + this.y*this.y);
     }
 
-    this.distance = function(v) {
+    distance(v) {
         return Math.sqrt(Math.pow(this.x - v.x, 2) + Math.pow(this.y - v.y, 2));
     }
 
-    this.normalize = function() {
+    normalize() {
         var aux = this.x*this.x + this.y*this.y;
         if(Math.abs(aux - 1.0) > 0.00001) {	// Don't normalize if it's not needed
             var magnitude = Math.sqrt(aux);
@@ -45,11 +45,11 @@ function Vector(x, y)
         return this;
     }
 
-    this.vectorTo = function(v) {
+    vectorTo(v) {
         return v.substract(this).normalize();
     }
 
-    this.draw = function(from, id, color) {
+    draw(from, id, color) {
         var container = $("#"+id);
         if(container.length == 0) {
             $("#console").append("<p id="+id+"></p>");

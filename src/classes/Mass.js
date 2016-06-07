@@ -1,13 +1,14 @@
 var MAX_SPEED = 5;
 
-function Mass(x, y, mass) {
+class Mass {
+	constructor(x, y, mass) {
+		this.pos = new Vector(x, y);
+		this.vel = new Vector(0, 0);
+		this.force = new Vector(0, 0);
+		this.mass = mass;
+	}
 
-	this.pos = new Vector(x, y);
-	this.vel = new Vector(0, 0);
-	this.force = new Vector(0, 0);
-	this.mass = mass;
-
-	this.computeForces = function(masses) {
+	computeForces(masses) {
 	    this.force = new Vector(0,0);
 
 	    for(var m in masses) {
@@ -20,17 +21,17 @@ function Mass(x, y, mass) {
 			    G * (this.mass * masses[m].mass) / Math.pow(distance, 2)
 		    );
 
-		    if(DEBUG) gravity.draw(this.pos, "to"+m, "#0f0");
+		    if (DEBUG) gravity.draw(this.pos, "to" + m, "#0f0");
 
 		    this.force = this.force.add(gravity);
 	    }
-    };
+    }
 
-	this.addForce = function (force) {
+	addForce(force) {
 		this.force = this.force.add(force);
-	};
+	}
 
-    this.move = function() {
+    move() {
         /*Most of the programmers do the gravity something like this:
         velocity = velocity + gravity*delta_time
         position = position + velocity*delta_time
@@ -47,10 +48,5 @@ function Mass(x, y, mass) {
 	    this.vel = this.vel.add(halfDeltaVel);
 	    this.pos = this.pos.add(this.vel.scalar(dt/1000));
         this.vel = this.vel.add(halfDeltaVel);
-    };
-
-	this.setMass = function(mass) {
-		this.mass = mass;
-	};
-
+    }
 }
