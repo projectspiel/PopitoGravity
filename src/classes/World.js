@@ -37,20 +37,20 @@ class World {
 
         this.clear();
         for(var e1 of this.entities) {
-            this.entities[e1].computeForces(this.entities.concat([this.player]));
-            this.entities[e1].addForce(this.gravityForce);
+            e1.computeForces(this.entities.concat([this.player]));
+            e1.addForce(this.gravityForce);
         }
 
         for(var e2 of this.entities) {
-            this.entities[e2].move();
-            if (this.entities[e2].collideEdges) {
-                this.entities[e2].collideEdges(canvas.width, canvas.height);
+            e2.move();
+            if (e2.collideEdges) {
+                e2.collideEdges(canvas.width, canvas.height);
             }
-            this.entities[e2].draw();
+            e2.draw();
 
             if(DEBUG) {
-                this.entities[e2].vel.draw(this.entities[e2].pos, "vel"+m, '#fff');
-                this.entities[e2].force.draw(this.entities[e2].pos, "force"+m, '#f00');
+                e2.vel.draw(e2.pos, "vel"+m, '#fff');
+                e2.force.draw(e2.pos, "force"+m, '#f00');
             }
         }
 
@@ -77,7 +77,7 @@ class World {
     initLevel() {
         for (let x = 0 ; x < 7 ; x++) {
             for (let y = 0 ; y < 5 ; y++) {
-                let block = new Block(x * 100, y * 50);
+                let block = new Block(25 + x * 100, 25 + y * 50, true);
                 this.entities.push(block);
             }
         }

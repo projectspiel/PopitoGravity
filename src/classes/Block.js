@@ -1,8 +1,9 @@
 class Block extends Mass {
-    constructor(x, y) {
+    constructor(x, y, pinned) {
         super(x, y);
         this.pos = new Vector(x, y);
-        this.mass = 1;
+        this.mass = 0;
+        this.pinned = pinned;
     }
 
     draw() {
@@ -11,5 +12,12 @@ class Block extends Mass {
         ctx.rect(this.pos.x, this.pos.y, 50, 20);
         ctx.closePath();
         ctx.fill();
+    }
+
+    move() {
+        if (this.pinned) {
+            return;
+        }
+        super.move();s
     }
 }
