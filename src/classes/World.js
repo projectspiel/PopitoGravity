@@ -36,21 +36,21 @@ class World {
         this.last_tick = tick;
 
         this.clear();
-        for(var e in this.entities) {
-            this.entities[e].computeForces(this.entities.concat([this.player]));
-            this.entities[e].addForce(this.gravityForce);
+        for(var e1 of this.entities) {
+            this.entities[e1].computeForces(this.entities.concat([this.player]));
+            this.entities[e1].addForce(this.gravityForce);
         }
 
-        for(var e in this.entities) {
-            this.entities[e].move();
-            if (this.entities[e].collideEdges) {
-                this.entities[e].collideEdges(canvas.width, canvas.height);
+        for(var e2 of this.entities) {
+            this.entities[e2].move();
+            if (this.entities[e2].collideEdges) {
+                this.entities[e2].collideEdges(canvas.width, canvas.height);
             }
-            this.entities[e].draw();
+            this.entities[e2].draw();
 
             if(DEBUG) {
-                this.entities[e].vel.draw(this.entities[e].pos, "vel"+m, '#fff');
-                this.entities[e].force.draw(this.entities[e].pos, "force"+m, '#f00');
+                this.entities[e2].vel.draw(this.entities[e2].pos, "vel"+m, '#fff');
+                this.entities[e2].force.draw(this.entities[e2].pos, "force"+m, '#f00');
             }
         }
 
