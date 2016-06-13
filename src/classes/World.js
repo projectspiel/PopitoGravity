@@ -39,6 +39,9 @@ class World {
         for(var e1 of this.entities) {
             e1.computeForces(this.entities.concat([this.player]));
             e1.addForce(this.gravityForce);
+            if (typeof e1.checkCollisions === 'function') {
+                e1.checkCollisions(this.entities);
+            }
         }
 
         for(var e2 of this.entities) {

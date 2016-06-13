@@ -1,9 +1,10 @@
-class Block extends Mass {
+class Block extends aggregation(Mass, Collidable) {
     constructor(x, y, pinned) {
-        super(x, y);
-        this.pos = new Vector(x, y);
-        this.mass = 0;
-        this.pinned = pinned;
+        super(x, y)
+        this.pos = new Vector(x, y)
+        this.mass = 0
+        this.pinned = pinned
+        this.hitArea = new SAT.Box(new SAT.Vector(x, y), 50, 20).toPolygon()
     }
 
     draw() {
@@ -18,6 +19,14 @@ class Block extends Mass {
         if (this.pinned) {
             return;
         }
-        super.move();s
+        super.move();
+    }
+
+    collide(entity) {
+        this.pinned = false
+    }
+
+    getHitArea() {
+        return this.hitArea;
     }
 }
