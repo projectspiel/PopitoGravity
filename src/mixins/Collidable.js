@@ -9,35 +9,36 @@ class Collidable {
         let response = new SAT.Response()
 
         for(var e of entities) {
+            let collided = false
             if (this === e || !e.isCollidable) {
                 continue
             }
 
             if (this.getHitArea() instanceof SAT.Polygon) {
                 if (e.getHitArea() instanceof SAT.Polygon) {
-                    SAT.testPolygonPolygon(this.getHitArea(), e.getHitArea(), response)
+                    collided = SAT.testPolygonPolygon(this.getHitArea(), e.getHitArea(), response)
                 } else if (e.getHitArea() instanceof SAT.Circle) {
-                    SAT.testPolygonCircle(this.getHitArea(), e.getHitArea(), response)
+                    collided = SAT.testPolygonCircle(this.getHitArea(), e.getHitArea(), response)
                 }
             } else if (this.getHitArea() instanceof SAT.Circle) {
                 if (e.getHitArea() instanceof SAT.Polygon) {
-                    SAT.testCircleCircle(this.getHitArea(), e.getHitArea(), response)
+                    collided = SAT.testPolygonCircle(e.getHitArea(), this.getHitArea(), response)
                 } else if (e.getHitArea() instanceof SAT.Circle) {
-                    SAT.testPolygonCircle(this.getHitArea(), e.getHitArea(), response)
+                    collided = SAT.testCircleCircle(e.getHitArea(), this.getHitArea(), response)
                 }
             } else {
                 throw "unknown hitArea class"
             }
 
-            if(response.overlap !== 0) {
-                this.collide(e)
+            if(collided) {
+                this.collide(e, response)
             }
 
             response.clear()
         }
     }
 
-    collide(entitie) {
+    collide(entity, collision) {
         throw "Collide must be defined"
     }
 

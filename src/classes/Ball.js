@@ -1,7 +1,8 @@
-class Ball extends Mass {
+class Ball extends aggregation(Mass, Collidable)  {
     constructor(x, y, mass) {
         super(x, y, mass);
         this.r = 5;
+        this.hitArea = new SAT.Circle(new SAT.Vector(x, y), this.r)
     }
 
     draw() {
@@ -35,5 +36,12 @@ class Ball extends Mass {
             this.pos.y = this.r / 2;
             this.vel.y *= -0.7;
         }
+    }
+
+    collide(entity, collision) {
+    }
+
+    getHitArea() {
+        return this.hitArea;
     }
 }

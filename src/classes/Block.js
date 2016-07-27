@@ -5,10 +5,11 @@ class Block extends aggregation(Mass, Collidable) {
         this.mass = 0
         this.pinned = pinned
         this.hitArea = new SAT.Box(new SAT.Vector(x, y), 50, 20).toPolygon()
+        this.color = "rgb(0,200,0)"
     }
 
     draw() {
-        ctx.fillStyle = "rgb(0,200,0)";
+        ctx.fillStyle = this.color;
         ctx.beginPath();
         ctx.rect(this.pos.x, this.pos.y, 50, 20);
         ctx.closePath();
@@ -22,8 +23,9 @@ class Block extends aggregation(Mass, Collidable) {
         super.move();
     }
 
-    collide(entity) {
-        this.pinned = false
+    collide(entity, collision) {
+        this.color = "rgb(200,0,0)"
+        //this.pinned = false
     }
 
     getHitArea() {
