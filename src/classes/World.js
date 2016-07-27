@@ -63,7 +63,7 @@ class World {
     };
 
     addBall() {
-        this.entities.push(new Ball(canvas.width/2, 20, 2));
+        this.entities.push(new Ball(canvas.width/2, 300, 2));
     };
 
     start()	{
