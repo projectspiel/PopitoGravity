@@ -25,7 +25,7 @@ class Block extends aggregation(Mass, Collidable) {
 
     collide(entity, collision) {
         this.color = "rgb(200,0,0)"
-        this.pinned = false
+        //this.pinned = false
     }
 
     getHitArea() {
