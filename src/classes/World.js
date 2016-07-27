@@ -37,7 +37,9 @@ class World {
 
         this.clear();
         for(var e1 of this.entities) {
-            e1.computeForces(this.entities.concat([this.player]));
+            if (e1 instanceof Ball) {
+                e1.computeForces([].concat([this.player]));
+            }
             e1.addForce(this.gravityForce);
             if (typeof e1.checkCollisions === 'function') {
                 e1.checkCollisions(this.entities);
