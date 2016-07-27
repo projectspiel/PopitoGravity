@@ -42,3 +42,7 @@ var aggregation = (baseClass, ...mixins) => {
     })
     return base
 };
+
+function log (msg) {
+    console.log(msg)
+}
