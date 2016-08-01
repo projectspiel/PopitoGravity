@@ -22,9 +22,9 @@ class Collidable {
                 }
             } else if (this.getHitArea() instanceof SAT.Circle) {
                 if (e.getHitArea() instanceof SAT.Polygon) {
-                    collided = SAT.testPolygonCircle(e.getHitArea(), this.getHitArea(), response)
+                    collided = SAT.testCirclePolygon(this.getHitArea(), e.getHitArea(), response)
                 } else if (e.getHitArea() instanceof SAT.Circle) {
-                    collided = SAT.testCircleCircle(e.getHitArea(), this.getHitArea(), response)
+                    collided = SAT.testCircleCircle(this.getHitArea(), e.getHitArea(), response)
                 }
             } else {
                 throw "unknown hitArea class"

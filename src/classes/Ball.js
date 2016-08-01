@@ -39,10 +39,14 @@ class Ball extends aggregation(Mass, Collidable)  {
     }
 
     collide(entity, collision) {
-        log (collision)
-        this.pos = this.pos.substract(new Vector(collision.overlapV.x, collision.overlapV.y))
+        let overlapX = collision.overlapV.x > 0 ? Math.ceil(collision.overlapV.x) : Math.floor(collision.overlapV.x),
+            overlapY = collision.overlapV.y > 0 ? Math.ceil(collision.overlapV.y) : Math.floor(collision.overlapV.y);
 
-        if (collision.overlapN.y > 0) {
+        this.pos = this.pos.substract(new Vector(overlapX, overlapY));
+        this.getHitArea().pos.x -= overlapX;
+        this.getHitArea().pos.y -= overlapY;
+
+        if (Math.abs(collision.overlapN.y) > Math.abs(collision.overlapN.x)) {
             this.vel.y *= -1
         } else {
             this.vel.x *= -1
