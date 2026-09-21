@@ -1,1 +1,10 @@
-hola
+PopitoGravity
+
+A small HTML5 canvas gravity toy. No build step and no dependencies.
+
+Run it:
+
+    npm start          # serves the folder at http://localhost:8000
+    open index.html    # or just open the file directly in a browser
+
+Move the mouse over the canvas to place the player, hold the mouse button to pull the ball, and click Start.
