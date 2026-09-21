@@ -9,7 +9,7 @@ class World {
 
         var self = this;
         $(canvas).mouseenter(function(e) {
-            self.player = new Player(e.pageX - $(this).offset().left, e.pageY - $(this).offset().top);
+            self.player = self.createPlayer(e);
         });
 
         $(canvas).mouseleave(function(e) {
@@ -18,13 +18,18 @@ class World {
 
         $(canvas).mousedown(function(e) {
             e.preventDefault(); // Or the text selection cursor will show up on click-and-drag in Chrome
-            //self.player.mass *= BOOST_FACTOR;
+            // mouseenter never fires if the cursor is already over the canvas when the page loads
+            if (self.player === null) {
+                self.player = self.createPlayer(e);
+            }
             self.player.setMass(1000);
-
             self.player.r += 1;
         });
 
         $(canvas).mouseup(function(e) {
+            if (self.player === null) {
+                return;
+            }
             self.player.setMass(0);
             self.player.r -= 1;
         });
@@ -46,7 +51,7 @@ class World {
             }
         }
 
-        for(var e2 of this.entities) {
+        for(var [i, e2] of this.entities.entries()) {
             e2.move();
             if (e2.collideEdges) {
                 e2.collideEdges(canvas.width, canvas.height);
@@ -54,8 +59,8 @@ class World {
             e2.draw();
 
             if(DEBUG) {
-                e2.vel.draw(e2.pos, "vel"+m, '#fff');
-                e2.force.draw(e2.pos, "force"+m, '#f00');
+                e2.vel.draw(e2.pos, "vel"+i, '#fff');
+                e2.force.draw(e2.pos, "force"+i, '#f00');
             }
         }
 
@@ -63,6 +68,11 @@ class World {
             this.player.draw();
         }
     };
+
+    createPlayer(e) {
+        var offset = $(canvas).offset();
+        return new Player(e.pageX - offset.left, e.pageY - offset.top);
+    }
 
     addBall() {
         this.entities.push(new Ball(canvas.width/2, 300, 2));
